@@ -77,7 +77,7 @@ const BandDetailPage = () => {
               <h2 className="text-lg font-semibold">Members</h2>
             </div>
             <div className="flex h-fit flex-col pt-4 gap-4">
-              {band?.members.map((member) => (
+              {band?.members.length > 0 ? band?.members.map((member) => (
                 <div className="flex flex-row">
                   <div>
                     <div className="bg-gray-200  mr-4 p-2 rounded-3xl">
@@ -87,7 +87,9 @@ const BandDetailPage = () => {
 
                   <div className="self-center font-semibold">{member.name}</div>
                 </div>
-              ))}
+              )) :
+              <p className="text-sm pl-2 italic">No albums to show.</p>
+              }
             </div>
           </div>
           </Card>
@@ -107,7 +109,7 @@ const BandDetailPage = () => {
               <h2 className="text-lg font-semibold">Albums</h2>
             </div>
             <div className="flex h-fit flex-col pt-4 gap-4">
-              {albums?.map((album) => (
+              {albums.length > 0 ? albums?.map((album) => (
                 <div className="flex flex-row">
                   <div className="self-center">
                     <div className="bg-gray-200  mr-4 p-2 rounded-3xl">
@@ -120,7 +122,8 @@ const BandDetailPage = () => {
                     <p className="text-gray-500 text-sm">{album.year}</p>
                   </div>
                 </div>
-              ))}
+              )) : 
+              <p className="text-sm pl-2 italic">No albums to show.</p>}
             </div>
    
 
