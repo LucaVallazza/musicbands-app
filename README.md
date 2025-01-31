@@ -48,3 +48,21 @@ export default tseslint.config({
   },
 })
 ```
+
+# Running the app
+
+### 1. Clone the repository
+```sh
+git clone https://github.com/LucaVallazza/musicbands-app.git
+cd musicbands-app
+```
+
+### 2. Install packages
+```sh
+npm install
+```
+
+### 3. Run the JSON Server
+```sh
+npx json-server db.json
+```
