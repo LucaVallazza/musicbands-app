@@ -2,16 +2,30 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { LogIn, Music } from "lucide-react";
+import { useState } from "react";
 import { useNavigate } from "react-router";
 
 const LogInPage = () => {
   
+  const [userError , setuserError] = useState(false)
+  const [passwordError , setPasswordError] = useState(false)
   const navigate = useNavigate()
 
-  const logIn = (e : any) =>{
+
+  //mock login
+  const logIn = (e) =>{
     e.preventDefault()
-    console.log("mail: " +e.nativeEvent.srcElement[0].value)
-    navigate('/bands')
+
+    const user = e.nativeEvent.srcElement[0].value
+    const password = e.nativeEvent.srcElement[1].value
+    
+    if(user && password){
+      localStorage.setItem('user' , user)
+      navigate('/bands')
+    }
+
+    setuserError(!user)
+    setPasswordError(!password)
   }
 
   return ( 
@@ -25,8 +39,10 @@ const LogInPage = () => {
           </div>
         </CardHeader>
         <CardContent>
-          <form onSubmit={e => logIn(e)} className="flex flex-col gap-2">
-            <Input placeholder="Email" type="email"></Input>
+          <form onSubmit={e => logIn(e)} className=" flex flex-col gap-2">
+            {userError ? <p className="text-sm text-red-500 text-left">Enter a valid username</p> : ''}
+            <Input placeholder="Username"></Input>
+            {passwordError ? <p className="text-sm text-red-500 text-left">Enter a password</p> : ''}
             <Input placeholder="Password" type="password"></Input>
             <Button className="mt-2">
               Login
