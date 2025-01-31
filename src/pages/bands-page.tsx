@@ -14,6 +14,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { AppContext } from "@/App";
+import { getGenreString } from "@/lib/utils";
+
 
 const BandsPage = () => {
   const navigate = useNavigate();
@@ -86,11 +88,7 @@ const BandsPage = () => {
     setFilteredBands(newBands);
   }, [filterBandName, filterBandGenre, filterBandDateOrder]);
 
-  const getGenreString = (genre: string) => {
-    const _genre = genres.find((g) => g.code == genre)?.name;
 
-    return _genre ? _genre : genre;
-  };
 
   return (
     <div className="w-full h-screen flex-col flex items-center">
@@ -140,12 +138,13 @@ const BandsPage = () => {
       <div className="flex w-3/4 flex-col items-center m-0 pt-8 p-0 gap-2">
         {filteredBands.length > 0 ? (
           filteredBands.map((band) => {
+
             return (
               <BandItem
                 onClick={()=>navigate(`/bands/${band.id}`)}
                 key={band.id}
                 band={band}
-                genre={getGenreString(band.genreCode)}
+                genre={getGenreString(band.genreCode, genres)}
               />
             );
           })
