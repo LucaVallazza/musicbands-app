@@ -12,12 +12,10 @@ const BandsPage = () => {
   }
 
   return (
-    <ProtectedRoute>
       <div>
         <h1>Bands page</h1>
         <Button onClick={logout}> Logout</Button>
       </div>
-    </ProtectedRoute>
   );
 };
 
