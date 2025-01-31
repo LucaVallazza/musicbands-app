@@ -17,9 +17,7 @@ const BandItem = ({ band, genre, onClick }: IProps) => {
           {/* <span style={{fontFamily : 'BarlowItalic'}} className="text-2xl" >
         {Math.floor(band.year / 10) * 10 % 100}'s
       </span> */}
-          <Music size={30}>
-            
-          </Music>
+          <Music size={30}></Music>
         </div>
       </div>
       <div className="h-auto justify-center flex-col flex w-full ">
