@@ -1,7 +1,7 @@
 import Header from "@/components/header";
 import { Band, Genre } from "@/lib/types";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 
 import BandItem from "@/components/band-item";
@@ -13,17 +13,19 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { AppContext } from "@/App";
 
 const BandsPage = () => {
   const navigate = useNavigate();
 
-  const [bands, setBands] = useState<Band[]>([]);
+
   const [filteredBands, setFilteredBands] = useState<Band[]>([]);
-  const [genres, setGenres] = useState<Genre[]>([]);
 
   const [filterBandName, setfilterBandName] = useState<string>("");
   const [filterBandGenre, setfilterBandGenre] = useState<string>("");
   const [filterBandDateOrder, setfilterBandDateOrder] = useState<string>("");
+
+  const {bands, setBands, genres, setGenres} = useContext(AppContext)
 
   useEffect(() => {
     getBands();
@@ -37,6 +39,7 @@ const BandsPage = () => {
       if (req.data) {
         console.log(req);
         setBands(req.data);
+
         setFilteredBands(req.data);
       }
     });
@@ -139,6 +142,7 @@ const BandsPage = () => {
           filteredBands.map((band) => {
             return (
               <BandItem
+                onClick={()=>navigate(`/bands/${band.id}`)}
                 key={band.id}
                 band={band}
                 genre={getGenreString(band.genreCode)}

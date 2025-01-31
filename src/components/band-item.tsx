@@ -4,11 +4,14 @@ import { Music } from "lucide-react";
 interface IProps {
   band: Band;
   genre: string | undefined;
+  onClick : () => void
 }
 
-const BandItem = ({ band, genre }: IProps) => {
+const BandItem = ({ band, genre, onClick }: IProps) => {
   return (
-    <div className="w-full flex flex-row text-left shadow-sm border-gray-50 border">
+    <div onClick={onClick} 
+         className="w-full flex flex-row text-left shadow-sm border-gray-50 border"
+    >
       <div className="h-fit w-fit p-4">
         <div className="bg-gray-100 p-2 rounded-3xl">
           {/* <span style={{fontFamily : 'BarlowItalic'}} className="text-2xl" >
