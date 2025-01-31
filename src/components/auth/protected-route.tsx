@@ -1,9 +1,9 @@
 import { Navigate } from "react-router";
 
-const ProtectedRoute = ({ children }) => {
+const ProtectedRoute = ({ component }) => {
   
   if(localStorage.getItem('user')){
-    return (children)
+    return (component)
   }else return (<Navigate to={'/login'}></Navigate>)
 
 };
