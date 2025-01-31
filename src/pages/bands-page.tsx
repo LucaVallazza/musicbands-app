@@ -1,7 +1,7 @@
 import Header from "@/components/header";
 import { Band, Genre } from "@/lib/types";
 import axios from "axios";
-import { Filter, Music, Search, SortAsc, SortDesc } from "lucide-react";
+import { AccessibilityIcon, Filter, Music, Search, SortAsc, SortDesc } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router";
 
@@ -24,8 +24,9 @@ const BandsPage = () => {
   const [genres, setGenres] = useState<Genre[]>([]);
   
   const [ascOrder , setAscOrder] = useState<Boolean>(true)
-  const [bandName , setABandName] = useState<string>("")
-  const [bandGenre , setBandGenre] = useState<string>("")
+  const [filterBandName , setfilterBandName] = useState<string>("")
+  const [filterBandGenre , setfilterBandGenre] = useState<string>("")
+  const [filterBandDateOrder , setfilterBandDateOrder] = useState<string>("")
 
 
   useEffect(() => {
@@ -57,36 +58,53 @@ const BandsPage = () => {
   // const filter = () =>{
   //   e.preventDefault()
     
-  //   bands.find(band => (band.name == bandName))
+  //   bands.find(band => (band.name == filterBandName))
 
   // }
 
   useEffect(() => {
     let newBands = bands
-    if(bandName){
-      newBands = newBands.filter(band => (band.name.toLowerCase().includes(bandName.toLowerCase())))
+    if(filterBandName){
+      newBands = newBands.filter(band => (band.name.toLowerCase().includes(filterBandName.toLowerCase())))
     }
     
-    if(bandGenre != "none"){
-      newBands = newBands.filter(band => (band.genreCode == bandGenre))
-      console.log()
+
+    if(filterBandGenre != 'none' && filterBandGenre){
+      newBands = newBands.filter(band => (band.genreCode == filterBandGenre))
     }
+    
+    console.log(filterBandDateOrder)
+    if(filterBandDateOrder != "none" && filterBandDateOrder){
+      if (filterBandDateOrder == "newest") {
+        newBands = [...newBands].sort((a,b) => b.year - a.year)
+        
+      }
+      else{
+        // create a copy of the array with [...newBands] and then sort it to avoid refresh problems on react
+        newBands = [...newBands].sort((a,b) => a.year - b.year)
+      }
+    }
+    
     setFilteredBands(newBands)
 
-    return () => {
-      
-    };
-  }, [bandName, bandGenre, bands]);
+  }, [filterBandName, filterBandGenre, filterBandDateOrder]);
+
+
+  const getGenreString = (genre : string) =>{
+    const _genre = genres.find((g) => g.code == genre)?.name 
+
+    return _genre ? _genre : genre
+  }
 
   return (
     <div className="w-full h-screen flex-col flex items-center">
       <Header />
-      <div className="flex w-3/4 mt-3 flex-row w-full sticky gap-2 top-0">
+      <div className="flex w-3/4 mt-3 flex-row sticky gap-2 top-0">
         <div className="flex-[5]">
-          <Input onChange={e => setABandName(e.target.value)} placeholder="Name"></Input>
+          <Input onChange={e => setfilterBandName(e.target.value)} placeholder="Name"></Input>
         </div>
         <div className="flex-[3]">
-          <Select onValueChange={e => setBandGenre(e)}>
+          <Select onValueChange={e => setfilterBandGenre(e)}>
             <SelectTrigger>
               <SelectValue placeholder="All genres"></SelectValue>
             </SelectTrigger>
@@ -95,27 +113,43 @@ const BandsPage = () => {
                 None
               </SelectItem>
               {genres.map((genre) => {
-                return <SelectItem value={genre.code}>{genre.name}</SelectItem>;
+                return <SelectItem key={genre.code} value={genre.code}>{genre.name}</SelectItem>;
               })}
             </SelectContent>
           </Select>
         </div>
-        {/* <div className="flex-1">
-          <Button  variant={"secondary"} onClick={() => setAscOrder(!ascOrder)}>
-            Year {ascOrder? <SortAsc></SortAsc> : <SortDesc></SortDesc>}
-          </Button>
-        </div> */}
-        <Button onClick={e => filter(e)}>
+
+        <div className="flex-[1]">
+        <Select onValueChange={e => setfilterBandDateOrder(e)} >
+            <SelectTrigger>
+              <SelectValue placeholder="Date"></SelectValue>
+            </SelectTrigger>
+            <SelectContent >
+              <SelectItem value="none">
+                None
+              </SelectItem>
+              <SelectItem value="newest">
+                Newest first
+              </SelectItem>
+              <SelectItem value="oldest">
+                Oldest first
+              </SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+
+        {/* <Button onClick={e => filter(e)}>
           <Search></Search>
-        </Button>
+        </Button> */}
       </div>
       <div className="flex w-3/4 flex-col items-center m-0 pt-8 p-0 gap-2">
         {filteredBands.length > 0 ? (
           filteredBands.map((band) => {
             return (
               <BandItem
+                key={band.id}
                 band={band}
-                genre={genres.find((g) => g.code == band.genreCode)?.name}
+                genre={ getGenreString(band.genreCode) }
               />
             );
           })
