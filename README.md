@@ -11,6 +11,9 @@ The website has to contain the following pages/features: (✅ Done - ⌛ Doing)
 * ✅ View information of a specific band,  including albums and members.
 * ✅ Logout
 
+***Aditional feature***
+* ✅ Responsive design
+
 # ⚙Running the app
 
 
