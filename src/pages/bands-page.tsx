@@ -93,14 +93,14 @@ const BandsPage = () => {
   return (
     <div className="w-full h-screen flex-col flex items-center">
       <Header />
-      <div className="flex w-3/4 mt-3 flex-row sticky gap-2 top-0">
-        <div className="flex-[5]">
+      <div className="w-3/4 mt-3 flex flex-col md:flex-row sticky bg-white py-2 shadow-sm gap-2 top-0">
+        <div className=" sticky md:block flex-[5]">
           <Input
             onChange={(e) => setfilterBandName(e.target.value)}
             placeholder="Name"
           ></Input>
         </div>
-        <div className="flex-[3]">
+        <div className="flex-[3] flex flex-row">
           <Select onValueChange={(e) => setfilterBandGenre(e)}>
             <SelectTrigger>
               <SelectValue placeholder="All genres"></SelectValue>
@@ -116,9 +116,7 @@ const BandsPage = () => {
               })}
             </SelectContent>
           </Select>
-        </div>
 
-        <div className="flex-[1]">
           <Select onValueChange={(e) => setfilterBandDateOrder(e)}>
             <SelectTrigger>
               <SelectValue placeholder="Date"></SelectValue>
@@ -130,6 +128,10 @@ const BandsPage = () => {
             </SelectContent>
           </Select>
         </div>
+
+        {/* <div className="flex-[1]">
+         
+        </div> */}
 
         {/* <Button onClick={e => filter(e)}>
           <Search></Search>
