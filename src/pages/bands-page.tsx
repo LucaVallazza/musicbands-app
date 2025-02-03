@@ -93,7 +93,7 @@ const BandsPage = () => {
   return (
     <div className="w-full h-screen flex-col flex items-center">
       <Header />
-      <div className="w-3/4 mt-3 flex flex-col md:flex-row sticky bg-white py-2 shadow-sm gap-2 top-0">
+      <div className="w-full md:w-3/4 xl:w-3/5  px-3 md:px-0 mt-3 flex flex-col md:flex-row sticky bg-white py-2 shadow-sm gap-2 top-0">
         <div className=" sticky md:block flex-[5]">
           <Input
             onChange={(e) => setfilterBandName(e.target.value)}
@@ -137,7 +137,7 @@ const BandsPage = () => {
           <Search></Search>
         </Button> */}
       </div>
-      <div className="flex w-3/4 flex-col items-center m-0 pt-8 p-0 gap-2">
+      <div className="flex w-full md:w-3/4 xl:w-3/5 flex-col items-center m-0 pt-8 px-3 md:px-0 gap-2">
         {filteredBands.length > 0 ? (
           filteredBands.map((band) => {
 
