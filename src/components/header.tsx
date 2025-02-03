@@ -13,7 +13,7 @@ const Header = () => {
   };
 
   return (
-    <div className=" w-full flex  flex-row justify-between py-2 px-4 shadow-md">
+    <div className=" w-full flex  flex-row justify-between py-2 px-4 md:px-8 shadow-md">
       <div className="flex cursor-pointer" onClick={()=> navigate('/bands')}>
         <Music size={20} className="my-auto self-center mr-2"></Music>
         <h1 className=" self-center text-left text-lg md:text-2xl font-semibold">Music Band App</h1>
