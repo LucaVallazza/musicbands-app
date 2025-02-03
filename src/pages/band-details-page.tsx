@@ -66,10 +66,10 @@ const BandDetailPage = () => {
 
         {/* Data */}
 
-        <div className="w-full flex flex-row justify-between mt-5">
+        <div className="w-full flex flex-col gap-5 md:flex-row justify-between mt-5">
 
           
-        <Card className="w-[49%] h-full flex-col flex items-start p-4">
+        <Card className="w-full md:w-[49%] h-full flex-col flex items-start p-4">
           {/* Members */}
           <div className="">
             <div className="flex flex-row">
@@ -99,7 +99,7 @@ const BandDetailPage = () => {
 
           {/* Albums */}
 
-          <Card className="w-[49%] h-full flex-col flex items-start p-4">
+          <Card className="w-full md:w-[49%] h-full flex-col flex items-start p-4">
 
           <div className="flex flex-row selfcen ">
               <DiscAlbum
