@@ -30,11 +30,11 @@ const LogInPage = () => {
 
   return ( 
     <div className="flex flex-col w-screen h-screen">
-      <Card className="m-auto w-96">
+      <Card className="m-auto w-72 md:w-96">
         <CardHeader>
           <div className="flex">
             <Music size={20} className="my-auto mr-2"></Music>
-            <h1 className="text-2xl font-semibold">Music Band App</h1>
+            <h1 className=" text-xl md:text-2xl font-semibold">Music Band App</h1>
 
           </div>
         </CardHeader>
