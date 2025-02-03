@@ -39,3 +39,9 @@ npx json-server db.json
 ```sh
 npm run dev
 ```
+
+# 📷 Screenshots
+
+![Login page - https://i.ibb.co/C3NTqKMn/musicbandapp.jpg](https://i.ibb.co/C3NTqKMn/musicbandapp.jpg)
+![Bands page - https://i.ibb.co/GfsvVgnc/homepage.jpg](https://i.ibb.co/GfsvVgnc/homepage.jpg)
+![Bands details page - https://i.ibb.co/QvDVS9bG/bands-detail.jpg](https://i.ibb.co/QvDVS9bG/bands-detail.jpg)
